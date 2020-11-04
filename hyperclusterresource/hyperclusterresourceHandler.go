@@ -90,8 +90,8 @@ func updateHCR(c client.Client, clusterName string, resourceList []hyperv1.Resou
 	for _, resource := range resourceList {
 		for index, value := range hcr.Status.Resources {
 			if strings.Compare(strings.ToLower(value.Name), strings.ToLower(resource.Name)) == 0 {
-				hcr.Status.Resources[index].Total = value.Total + resource.Total
-				hcr.Status.Resources[index].Running = value.Running + resource.Running
+				hcr.Status.Resources[index].Total = resource.Total
+				hcr.Status.Resources[index].Running = resource.Running
 			}
 		}
 	}
