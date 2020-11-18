@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hypercloud4-multi-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hypercloud4-multi-api-server
+  namespace: hypercloud4-multi-system
+  labels:
+    hypercloud4: multi-api-server
+    name: hypercloud4-multi-api-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      hypercloud4: multi-api-server
+  template:
+    metadata:
+      name: hypercloud4-multi-api-server
+      labels:
+        hypercloud4: multi-api-server
+    spec:
+      containers:
+        - name: hypercloud4-multi-api-server
+          image: multi-api-server:latest
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: Asia/Seoul
+          ports:
+            - containerPort: 28678
+          volumeMounts:
+            - name: config-module
+              mountPath: /config
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hypercloud4-api-server-service
+  namespace: hypercloud4-system
+spec:
+  ports:
+    - name: "port1"
+      port: 28678
+      protocol: TCP
+      targetPort: 80
+  selector:
+    hypercloud4: multi-api-server
+  type: LoadBalancer

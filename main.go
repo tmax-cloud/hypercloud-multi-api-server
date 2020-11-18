@@ -17,7 +17,7 @@ func main() {
 
 	// HTTP Server Start
 	klog.Info("Starting Hypercloud-Multi-Operator-API server...")
-	if err := http.ListenAndServe(":5460", mux); err != nil {
+	if err := http.ListenAndServe(":80", mux); err != nil {
 		klog.Errorf("Failed to listen and serve Hypercloud-Multi-Operator-API server: %s", err)
 	}
 	klog.Info("Started Hypercloud-Multi-Operator-API server")
