@@ -4,6 +4,7 @@ const (
 	HYPERCLUSTERRESOURCE_CLUSTER_NAME   = "cluster-name"
 	HYPERCLUSTERRESOURCE_NAMESPACE      = "kube-federation-system"
 	HYPERCLUSTERRESOURCE_CONFIGMAP_NAME = "hyperclusterresource"
+	HYPERCLOUD_URL                      = "url"
 	KUBECONFIG_POSTFIX                  = "-kubeconfig"
 	KUBECONFIG_NAMESPACE                = "default"
 	REMOTERESOURCE_KIND                 = "kind"
